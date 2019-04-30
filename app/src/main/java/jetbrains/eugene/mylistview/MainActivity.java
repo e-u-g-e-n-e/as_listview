@@ -1,5 +1,6 @@
 package jetbrains.eugene.mylistview;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,10 +54,24 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.lv_list);
         listView.setAdapter(adapter);
 
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(MainActivity.this, heroes.get(position).getName(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, heroes.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Hero hero = new Hero();
+                hero.setName(heroes.get(position).getName());
+                hero.setDescription(heroes.get(position).getDescription());
+                hero.setPhoto(heroes.get(position).getPhoto());
+
+                Intent newHeroIntent = new Intent(MainActivity.this, FullProfile.class);
+                newHeroIntent.putExtra(FullProfile.SELECTED_HERO, hero);
+                startActivity(newHeroIntent);
+
             }
         });
 

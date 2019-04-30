@@ -32,4 +32,6 @@
         android:ellipsize="end"
         android:maxLines="3"
         android:text="@string/lorem" />
+
+
 </RelativeLayout>
